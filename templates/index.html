@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Career Mentor</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #eef3f8;
+            color: #222;
+        }
+
+        /* Main Container */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        /* Header */
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+            color: #1d4ed8;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        /* Form */
+
+        label {
+            display: block;
+            margin-top: 22px;
+            margin-bottom: 8px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #fafafa;
+        }
+
+        textarea {
+            height: 110px;
+            resize: vertical;
+        }
+
+        textarea:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        /* Button */
+
+        button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Results */
+
+        .results {
+            margin-top: 45px;
+        }
+
+        .results-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        /* Best Career */
+
+        .best-career {
+            background: #eff6ff;
+            border: 2px solid #2563eb;
+            border-radius: 15px;
+            padding: 28px;
+            margin-bottom: 30px;
+        }
+
+        .best-title {
+            text-align: center;
+            color: #1d4ed8;
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+        .best-career h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Recommendation Cards */
+
+        .recommendation {
+            background: white;
+            border: 1px solid #dbe3ec;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .recommendation h3 {
+            color: #2563eb;
+            font-size: 21px;
+            margin-top: 0;
+        }
+
+        .score {
+            font-size: 19px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .info {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        /* Career Guidance */
+
+        .guidance {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            border-radius: 8px;
+        }
+
+        .guidance h4 {
+            margin-top: 0;
+            color: #15803d;
+            font-size: 18px;
+        }
+
+        .guidance p {
+            line-height: 1.6;
+        }
+
+        /* Footer */
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 95%;
+                padding: 25px;
+                margin: 20px auto;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .best-career {
+                padding: 20px;
+            }
+
+            .recommendation {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>🎓 AI Powered Career Mentor</h1>
+
+        <p>
+            Analyze your skills and resume to discover suitable career paths.
+        </p>
+
+    </div>
+
+
+    <!-- INPUT FORM -->
+
+    <form action="/" method="POST" enctype="multipart/form-data">
+
+        <label for="skills">
+            Your Skills
+        </label>
+
+        <textarea
+            id="skills"
+            name="skills"
+            placeholder="Enter your skills here. Example: Python, SQL, Machine Learning, NLP"
+        ></textarea>
+
+
+        <label for="goal">
+            Your Career Goal
+        </label>
+
+        <textarea
+            id="goal"
+            name="goal"
+            placeholder="Enter your career goal. Example: I want to become a Data Scientist"
+        ></textarea>
+
+
+        <label for="resume">
+            Upload Resume
+        </label>
+
+        <input
+            type="file"
+            id="resume"
+            name="resume"
+            accept=".pdf,.doc,.docx"
+        >
+
+
+        <button type="submit">
+            🚀 Get Career Recommendations
+        </button>
+
+    </form>
+
+
+    <!-- RESULTS -->
+
+    {% if recommendations %}
+
+    <div class="results">
+
+        <h2 class="results-title">
+            Career Recommendations
+        </h2>
+
+
+        <!-- BEST CAREER -->
+
+        {% set best = recommendations[0] %}
+
+        <div class="best-career">
+
+            <div class="best-title">
+                🏆 Best Career Match
+            </div>
+
+            <h3>
+                {{ best.career }}
+            </h3>
+
+            <p class="score">
+                Match Score: {{ best.score }}%
+            </p>
+
+            <p class="info">
+                <strong>Matched Skills:</strong>
+                {{ best.matched }}
+            </p>
+
+            <p class="info">
+                <strong>Missing Skills:</strong>
+                {{ best.missing }}
+            </p>
+
+            <p class="info">
+                <strong>Skills to Learn:</strong>
+                {{ best.learning }}
+            </p>
+
+
+            <!-- CAREER GUIDANCE -->
+
+            <div class="guidance">
+
+                <h4>
+                    💡 Career Guidance
+                </h4>
+
+                {% if best.learning == "No additional skills to learn" %}
+
+                <p>
+                    You already have the main skills required for
+                    <strong>{{ best.career }}</strong>.
+                    Continue practicing your skills and work on
+                    real-world projects.
+                </p>
+
+                {% else %}
+
+                <p>
+                    To become more prepared for a career as a
+                    <strong>{{ best.career }}</strong>,
+                    focus on learning and improving:
+                    {{ best.learning }}.
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- ALL RECOMMENDATIONS -->
+
+        {% for rec in recommendations %}
+
+        <div class="recommendation">
+
+            <h3>
+                {{ rec.career }}
+            </h3>
+
+            <p class="score">
+                Match Score: {{ rec.score }}%
+            </p>
+
+            <p class="info">
+                <strong>Matched Skills:</strong>
+                {{ rec.matched }}
+            </p>
+
+            <p class="info">
+                <strong>Missing Skills:</strong>
+                {{ rec.missing }}
+            </p>
+
+            <p class="info">
+                <strong>Skills to Learn:</strong>
+                {{ rec.learning }}
+            </p>
+
+            <p class="info">
+                <strong>Required Skills:</strong>
+                {{ rec.skills }}
+            </p>
+
+
+            <!-- GUIDANCE -->
+
+            <div class="guidance">
+
+                <h4>
+                    💡 Career Guidance
+                </h4>
+
+                {% if rec.learning == "No additional skills to learn" %}
+
+                <p>
+                    You already have the main skills required for
+                    <strong>{{ rec.career }}</strong>.
+                    Continue practicing your skills and work on
+                    real-world projects.
+                </p>
+
+                {% else %}
+
+                <p>
+                    To become more prepared for a career as a
+                    <strong>{{ rec.career }}</strong>,
+                    focus on learning and improving:
+                    {{ rec.learning }}.
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <p>
+            AI Career Mentor | Python + Flask | Third Year Project
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
